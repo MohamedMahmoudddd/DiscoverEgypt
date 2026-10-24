@@ -1,0 +1,7 @@
+@model IReadOnlyList<DiscoverEgypt.Domain.Entities.VerificationRequest>
+@* ملخص Member 6: مراجعة طلبات توثيق المرشدين المعلقة وتسجيل قرار المسؤول وسبب الرفض. *@
+@{ ViewData["Title"] = "طلبات التحقق"; }
+<h1>طلبات التحقق من المرشدين</h1><div class="row g-3">
+@foreach (var item in Model) { <div class="col-12"><article class="card"><div class="card-body"><h2 class="h5">طلب #@item.Id · مرشد #@item.GuideProfileId</h2><p>تاريخ التقديم: @item.SubmittedAt.ToLocalTime().ToString("g") · صلاحية الترخيص: @item.LicenseExpiryDate</p><p>المستندات: @string.Join("، ", item.Documents.Select(x => x.DocType))</p><p class="text-muted">تُحفظ الملفات الخاصة في مخزن محمي ولا تُعرض بروابط عامة.</p>
+<form asp-action="ReviewVerification" method="post" class="row g-2"><input type="hidden" name="id" value="@item.Id"/><div class="col-md-7"><input name="reason" class="form-control" maxlength="1000" placeholder="سبب الرفض عند الحاجة"/></div><div class="col-auto"><button name="approve" value="true" class="btn btn-success">اعتماد</button></div><div class="col-auto"><button name="approve" value="false" class="btn btn-outline-danger">رفض</button></div></form></div></article></div> }
+@if (Model.Count == 0) { <p>لا توجد طلبات معلقة.</p> }</div>

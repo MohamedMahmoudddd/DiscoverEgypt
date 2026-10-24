@@ -1,0 +1,23 @@
+﻿<!-- Member 6 summary: web project references infrastructure notification implementation and persistence. -->
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DiscoverEgypt.Domain\DiscoverEgypt.Domain.csproj" />
+    <ProjectReference Include="..\DiscoverEgypt.Persistence\DiscoverEgypt.Persistence.csproj" />
+    <ProjectReference Include="..\DiscoverEgypt.Infrastructure\DiscoverEgypt.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

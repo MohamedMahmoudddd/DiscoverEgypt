@@ -1,0 +1,6 @@
+@model IReadOnlyList<DiscoverEgypt.Domain.Entities.Booking>
+@* ملخص Member 6: متابعة أحدث الحجوزات وحالاتها وقيمها المالية المرتبطة. *@
+@{ ViewData["Title"] = "الحجوزات"; }
+<h1>الحجوزات</h1><div class="table-responsive"><table class="table"><thead><tr><th>رقم</th><th>النوع</th><th>المسافر</th><th>المزود</th><th>الحالة</th><th>الموعد</th><th>الإجمالي</th><th>الدفع</th><th>المستحق</th></tr></thead><tbody>
+@foreach (var b in Model) { <tr><td>@b.Id</td><td>@b.BookingType</td><td>@b.TouristUserId</td><td>@b.ProviderUserId</td><td>@b.Status</td><td>@b.ScheduledStart.ToLocalTime().ToString("g")</td><td>@b.TotalAmount.ToString("N2")</td><td>@b.Payment?.Status</td><td>@b.Payout?.Status</td></tr> }
+</tbody></table></div>

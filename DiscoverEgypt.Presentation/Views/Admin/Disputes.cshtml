@@ -1,0 +1,6 @@
+@model IReadOnlyList<DiscoverEgypt.Domain.Entities.Dispute>
+@* ملخص Member 6: عرض النزاعات وتوثيق قرار الإدارة ونتيجته وملاحظة التسوية. *@
+@{ ViewData["Title"] = "النزاعات والتذاكر"; }
+<h1>النزاعات والتذاكر</h1><div class="row g-3">
+@foreach (var d in Model) { <div class="col-12"><article class="card"><div class="card-body"><h2 class="h5">نزاع #@d.Id · الحجز #@d.BookingId · @d.Status</h2><p>@d.Description</p>@if (d.Status != DiscoverEgypt.Domain.Enums.DisputeStatus.Resolved && d.Status != DiscoverEgypt.Domain.Enums.DisputeStatus.Closed) { <form asp-action="ResolveDispute" method="post" class="row g-2"><input type="hidden" name="id" value="@d.Id"/><div class="col-md-3"><select name="outcome" class="form-select" asp-items="Html.GetEnumSelectList<DiscoverEgypt.Domain.Enums.DisputeOutcome>()"></select></div><div class="col-md-7"><input name="note" required maxlength="3000" class="form-control" placeholder="ملاحظة القرار وأسبابه"/></div><div class="col-auto"><button class="btn btn-primary">تسجيل القرار</button></div></form> } else { <p>النتيجة: @d.Outcome · @d.ResolutionNote</p> }</div></article></div> }
+@if (Model.Count == 0) { <p>لا توجد نزاعات مسجلة.</p> }</div>

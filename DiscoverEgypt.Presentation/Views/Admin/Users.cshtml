@@ -1,0 +1,6 @@
+@model IReadOnlyList<DiscoverEgypt.Domain.Entities.ApplicationUser>
+@* ملخص Member 6: إدارة الحسابات؛ عرض حالة كل مستخدم وتمكين أو تعطيل الحساب بواسطة مسؤول مصرح له. *@
+@{ ViewData["Title"] = "المستخدمون"; }
+<h1>إدارة المستخدمين</h1><div class="table-responsive"><table class="table align-middle"><thead><tr><th>الاسم</th><th>البريد</th><th>الحالة</th><th>تاريخ التسجيل</th><th>الإجراء</th></tr></thead><tbody>
+@foreach (var user in Model) { <tr><td>@user.FullName</td><td>@user.Email</td><td>@(user.IsActive ? "نشط" : "معطل")</td><td>@user.CreatedAt.ToLocalTime().ToString("g")</td><td><form asp-action="SetUserActive" method="post"><input type="hidden" name="id" value="@user.Id"/><input type="hidden" name="active" value="@(!user.IsActive)"/><button class="btn btn-sm @(user.IsActive ? "btn-outline-danger" : "btn-outline-success")">@(user.IsActive ? "تعطيل" : "تفعيل")</button></form></td></tr> }
+</tbody></table></div>

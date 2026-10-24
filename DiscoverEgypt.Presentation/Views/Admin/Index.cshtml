@@ -1,0 +1,13 @@
+@model DiscoverEgypt.Presentation.Models.AdminDashboardViewModel
+@* ملخص Member 6: لوحة تحكم الإدارة ومؤشرات المستخدمين والتحقق والتجارب والحجوزات والمدفوعات والنزاعات. *@
+@{ ViewData["Title"] = "لوحة الإدارة"; }
+<h1>لوحة إدارة Discover Egypt</h1>
+<p class="text-muted">نظرة عامة على نشاط المنصة والمهام التي تحتاج إلى مراجعة.</p>
+<div class="row g-3 mb-4">
+ @foreach (var card in new[] { ("المستخدمون", Model.Users.ToString()), ("الحسابات النشطة", Model.ActiveUsers.ToString()), ("طلبات التحقق المعلقة", Model.PendingVerifications.ToString()), ("التجارب بانتظار المراجعة", Model.PendingExperiences.ToString()), ("الحجوزات", Model.Bookings.ToString()), ("النزاعات المفتوحة", Model.OpenDisputes.ToString()), ("المدفوعات المكتملة", Model.GrossPayments.ToString("N2") + " EGP"), ("مستحقات معلقة", Model.PendingPayouts.ToString("N2") + " EGP") }) {
+  <div class="col-sm-6 col-xl-3"><div class="card h-100 shadow-sm"><div class="card-body"><div class="text-muted">@card.Item1</div><strong class="fs-3">@card.Item2</strong></div></div></div>
+ }
+</div>
+<nav class="d-flex flex-wrap gap-2">
+ <a class="btn btn-primary" asp-action="Verifications">طلبات التحقق</a><a class="btn btn-primary" asp-action="Experiences">التجارب</a><a class="btn btn-outline-primary" asp-action="UsersList">المستخدمون</a><a class="btn btn-outline-primary" asp-action="Bookings">الحجوزات</a><a class="btn btn-outline-primary" asp-action="Transactions">المعاملات</a><a class="btn btn-outline-primary" asp-action="Payouts">المستحقات</a><a class="btn btn-outline-primary" asp-action="Disputes">النزاعات والتذاكر</a>
+</nav>

@@ -1,0 +1,6 @@
+@model IReadOnlyList<DiscoverEgypt.Domain.Entities.Payout>
+@* ملخص Member 6: متابعة مستحقات المزودين وتواريخ الأهلية وحالات الصرف. *@
+@{ ViewData["Title"] = "المستحقات"; }
+<h1>المستحقات والتحويلات</h1><div class="table-responsive"><table class="table"><thead><tr><th>المستحق</th><th>الحجز</th><th>الحالة</th><th>القيمة</th><th>مؤهل للصرف من</th><th>تاريخ الصرف</th></tr></thead><tbody>
+@foreach (var p in Model) { <tr><td>@p.Id</td><td>@p.BookingId</td><td>@p.Status</td><td>@p.Amount.ToString("N2") EGP</td><td>@p.EligibleAt.ToLocalTime().ToString("g")</td><td>@p.PaidAt?.ToLocalTime().ToString("g")</td></tr> }
+</tbody></table></div>

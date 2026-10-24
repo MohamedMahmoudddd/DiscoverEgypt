@@ -1,0 +1,6 @@
+@model IReadOnlyList<DiscoverEgypt.Domain.Entities.Payment>
+@* ملخص Member 6: لوحة قراءة لمعاملات الدفع التجريبية، مع ربط كل معاملة بالحجز. *@
+@{ ViewData["Title"] = "المعاملات"; }
+<h1>المعاملات والمدفوعات</h1><div class="table-responsive"><table class="table"><thead><tr><th>المعاملة</th><th>الحجز</th><th>الحالة</th><th>القيمة</th><th>تاريخ الدفع</th><th>الإنشاء</th></tr></thead><tbody>
+@foreach (var p in Model) { <tr><td>@p.Id</td><td>@p.BookingId</td><td>@p.Status</td><td>@p.Amount.ToString("N2") EGP</td><td>@p.PaidAt?.ToLocalTime().ToString("g")</td><td>@p.CreatedAt.ToLocalTime().ToString("g")</td></tr> }
+</tbody></table></div>
